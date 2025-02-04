@@ -1,36 +1,34 @@
-import PropTypes from 'prop-types';
-import TimeStamp from './TimeStamp';
+import PropTypes from "prop-types";
+import TimeStamp from "./TimeStamp";
+import { Link } from 'react-router-dom';
 
-const ArticleCard = ({ article }) => {
+
+const ArticleCard = ({ article, isPreview = true }) => {
   return (
-    <div className="mb-8">
-      <h2 className="text-2xl font-bold">{article.headline}</h2>
-      <div className="my-2">
-        <TimeStamp time={article.publishedDate} />
+    <div>
+      <h2>{article.title}</h2>
+      <div>
+        <TimeStamp time={article.date} />
+        <span><a href={article.url}>{article.source}</a></span>
+        {article.featured && <span>Featured</span>}
       </div>
-      <p className="my-2">{article.summary}</p>
-      <div className="my-2">
-        {article.topics.map((topic, index) => (
-          <span key={topic} className="mr-1">
-            {topic}
-          </span>
-        ))}
-      </div>
-      <div className="flex items-center mt-2">
-        <span className="text-sm mr-2">Read More </span>
-        <span className="text-lg">→</span>
-      </div>
+      <p>{isPreview ? article.content.substring(0, 200) + '...' : article.content}</p>
+      {isPreview && <Link to={`/articles/${article.id}`}>Read More</Link>}
     </div>
   );
 };
 
 ArticleCard.propTypes = {
   article: PropTypes.shape({
-    headline: PropTypes.string.isRequired,
-    publishedDate: PropTypes.string.isRequired,
-    summary: PropTypes.string.isRequired,
-    topics: PropTypes.arrayOf(PropTypes.string).isRequired,
+    title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    source: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    featured: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
+  isPreview: PropTypes.bool
 };
 
 export default ArticleCard;
