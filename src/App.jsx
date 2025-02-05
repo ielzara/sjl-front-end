@@ -11,12 +11,17 @@ function App() {
     setSearchKeyword(term);
   };
 
+  const handleClear = () => {
+    setSearchKeyword('');
+  };
+
   return (
     <BrowserRouter>
       <div>
         <Navigation 
           onSearch={handleSearch} 
-          onClearSearch={() => setSearchKeyword('')}
+          onClearSearch={handleClear}
+          searchTerm={searchKeyword}
         />
         <main>
           <Routes>
