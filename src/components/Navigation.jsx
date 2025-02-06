@@ -5,18 +5,18 @@ import logo from '../assets/SJL-logo-final.jpg';
 
 const Navigation = ({ onSearch, onClearSearch, searchTerm }) => {
   return (
-    <header style={{backgroundColor: '#ebebeb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'}}>
-      <div style={{maxWidth: '1280px', margin: '0 auto', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <Link to="/" onClick={onClearSearch} style={{display: 'flex', alignItems: 'center', textDecoration: 'none'}}>
+    <header className="bg-logo-bg shadow-lg">
+      <div className="max-w-7xl mx-auto p-4 flex justify-between items-center">
+        <Link to="/" onClick={onClearSearch} className="flex items-center no-underline">
           <img 
             src={logo} 
             alt="Social Justice Library Logo" 
-            style={{ height: '8em', width: 'auto' }} 
+            className="h-32 w-auto" 
           />
-          <span style={{fontSize: '1.25rem', fontWeight: 700, marginLeft: '1rem', color: '#1f2937', fontFamily: 'Merriweather, serif'}}>Social Justice Library</span>
+          <span className="text-xl font-bold ml-4 text-gray-800 font-merriweather">Social Justice Library</span>
         </Link>
         
-        <div style={{width: '400px'}}>
+        <div className="w-[400px]">
           <SearchBar 
             onSearch={onSearch} 
             onClear={onClearSearch}

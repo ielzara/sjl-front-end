@@ -19,63 +19,27 @@ const SearchBar = ({ onSearch, onClear, searchTerm = '' }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{position: 'relative', width: '100%'}}>
+    <form onSubmit={handleSubmit} className="relative w-full">
       <input
         type="search"
         placeholder="Search articles..."
         value={localSearchTerm}
         onChange={(e) => setLocalSearchTerm(e.target.value)}
-        style={{
-            width: '100%',
-            height: '40px',
-            padding: '0 16px',
-            border: '1px solid #d1d5db',
-            borderRadius: '8px',
-            fontSize: '14px',
-            backgroundColor: 'white',
-            color: '#374151',
-            fontFamily: 'Merriweather, serif'
-          }}
+        className="w-full h-10 px-4 border border-gray-300 rounded-lg text-sm bg-white text-gray-700 font-merriweather outline-none hover:ring-2 hover:ring-gray-400 hover:border-gray-400 focus:ring-2 focus:ring-gray-400 focus:border-gray-400 transition-colors"
       />
-      <div style={{
-        position: 'absolute',
-        right: '8px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px'
-      }}>
+      <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
         {localSearchTerm && (
           <button
             type="button"
             onClick={handleClear}
-            style={{
-              padding: '4px 8px',
-              color: '#9CA3AF',
-              backgroundColor: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '18px'
-            }}
+            className="px-2 py-1 text-gray-400 bg-transparent border-none cursor-pointer text-lg hover:text-gray-600 transition-colors"
           >
             ×
           </button>
         )}
         <button
           type="submit"
-          style={{
-              height: '32px',
-              padding: '0 16px',
-              backgroundColor: '#F3F4F6',
-              border: '1px solid #D1D5DB',
-              borderRadius: '6px',
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#374151',
-              cursor: 'pointer',
-              fontFamily: 'Merriweather, serif'
-            }}
+          className="h-8 px-4 bg-gray-100 border border-gray-300 rounded-md text-sm font-medium text-gray-700 cursor-pointer font-merriweather hover:bg-gray-200 transition-colors"
         >
           Search
         </button>

@@ -30,9 +30,11 @@ export default {
           800: '#5b21b6',
           900: '#4c1d95',
         },
+        'logo-bg': '#ebebeb',
       },
       fontFamily: {
         'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'merriweather': ['Merriweather', 'serif'],
       },
       spacing: {
         '128': '32rem',
@@ -42,4 +44,3 @@ export default {
   },
   plugins: [],
 }
-

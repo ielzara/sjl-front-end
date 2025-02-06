@@ -5,76 +5,53 @@ import './ArticleContent.css';
 
 const ArticleCard = ({ article, isPreview = true }) => {
   return (
-    <article style={{
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      border: '1px solid #e5e7eb',
-      overflow: 'hidden',
-      marginBottom: '2rem',
-      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-      display: 'flex',
-      flexDirection: isPreview ? 'row' : 'column',
-      padding: isPreview ? '1.5rem' : 0
-    }}>
+    <article className={`
+      bg-white
+      rounded-lg
+      border
+      border-gray-200
+      overflow-hidden
+      mb-8
+      shadow-sm
+      flex
+      ${isPreview ? 'flex-row p-6' : 'flex-col p-0'}
+    `}>
       {/* Article image for preview mode */}
       {isPreview && article.thumbnail_url && (
-        <div style={{ 
-          width: '300px',
-          height: 'auto',
-          flexShrink: 0,
-          marginRight: '1.5rem',
-          display: 'flex',
-          alignItems: 'center'
-        }}>
-          <div style={{
-            width: '100%',
-            height: '200px',
-            borderRadius: '4px',
-            overflow: 'hidden'
-          }}>
+        <div className="w-[300px] h-auto flex-shrink-0 mr-6 flex items-center">
+          <div className="w-full h-[200px] rounded overflow-hidden">
             <img 
               src={article.thumbnail_url}
               alt={article.main_image_alt || article.title}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }}
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
       )}
 
       {/* Article content */}
-      <div style={{ 
-        padding: '1.5rem',
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: isPreview ? 'center' : 'flex-start'
-      }}>
-        <h2 style={{
-          fontSize: isPreview ? '1.5rem' : '2rem',
-          fontWeight: 700,
-          marginBottom: '0.75rem',
-          fontFamily: 'Merriweather, serif',
-          color: '#111827'
-        }}>{article.title}</h2>
+      <div className={`
+        p-6
+        flex-1
+        flex
+        flex-col
+        ${isPreview ? 'justify-center' : 'justify-start'}
+      `}>
+        <h2 className={`
+          ${isPreview ? 'text-2xl' : 'text-4xl'}
+          font-bold
+          mb-3
+          font-serif
+          text-gray-900
+        `}>{article.title}</h2>
 
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          marginBottom: '1rem',
-          color: '#6B7280',
-          fontSize: '0.875rem'
-        }}>
+        <div className="flex items-center gap-4 mb-4 text-gray-500 text-sm">
           <TimeStamp time={article.date} />
           <span>|</span>
           <span>
             <a 
               href={article.url} 
-              style={{ color: '#6B7280', textDecoration: 'none' }}
+              className="text-gray-500 no-underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -82,89 +59,51 @@ const ArticleCard = ({ article, isPreview = true }) => {
             </a>
           </span>
           {article.featured && (
-            <span style={{
-              backgroundColor: '#EEF2FF',
-              color: '#4F46E5',
-              padding: '0.25rem 0.75rem',
-              borderRadius: '9999px',
-              fontSize: '0.75rem',
-              fontWeight: 500
-            }}>Featured</span>
+            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-medium">
+              Featured
+            </span>
           )}
         </div>
 
         {!isPreview && article.main_image_url && (
-          <div style={{ 
-            width: '70%',
-            margin: '2rem auto',
-            borderRadius: '8px',
-            overflow: 'hidden'
-          }}>
+          <div className="w-[70%] mx-auto my-8 rounded-lg overflow-hidden">
             <img
               src={article.main_image_url}
               alt={article.main_image_alt || article.title}
-              style={{
-                width: '100%',
-                height: 'auto',
-                objectFit: 'cover'
-              }}
+              className="w-full h-auto object-cover"
             />
             {(article.main_image_caption || article.main_image_credit) && (
-              <div style={{ 
-                fontSize: '0.875rem', 
-                color: '#6B7280', 
-                marginTop: '0.5rem',
-                padding: '0 1.5rem'
-              }}>
+              <div className="text-sm text-gray-500 mt-2 px-6">
                 {article.main_image_caption}
                 {article.main_image_caption && article.main_image_credit && ' | '}
                 {article.main_image_credit && (
-                  <span style={{ fontStyle: 'italic' }}>{article.main_image_credit}</span>
+                  <span className="italic">{article.main_image_credit}</span>
                 )}
               </div>
             )}
           </div>
         )}
 
-        <div style={{ 
-          color: '#4B5563',
-          fontSize: '1rem',
-          lineHeight: '1.5',
-          marginBottom: '1.5rem'
-        }}>
+        <div className="text-gray-600 text-base leading-normal mb-6">
           <div 
-            className="article-content"
+            className="article-content max-w-full overflow-hidden"
             dangerouslySetInnerHTML={{ 
               __html: isPreview 
                 ? article.content.substring(0, 500) + '...'
                 : article.content
             }} 
-            style={{
-              maxWidth: '100%',
-              overflow: 'hidden'
-            }}
           />
         </div>
 
         {isPreview && (
-          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <Link 
-              to={`/articles/${article.id}`}
-              style={{
-                display: 'inline-block',
-                padding: '0.5rem 1rem',
-                backgroundColor: '#F3F4F6',
-                color: '#374151',
-                textDecoration: 'none',
-                borderRadius: '6px',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                border: '1px solid #D1D5DB'
-              }}
-          >
-            Read More
-            </Link>
-          </div>
+        <div className="flex justify-start">
+        <Link 
+        to={`/articles/${article.id}`}
+        className="inline-block px-4 py-2 bg-gray-100 text-gray-700 no-underline rounded-md text-sm font-medium border border-gray-300"
+        >
+        Read More
+        </Link>
+        </div>
         )}
       </div>
     </article>
