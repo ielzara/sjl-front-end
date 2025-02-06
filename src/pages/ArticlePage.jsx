@@ -41,14 +41,33 @@ const ArticlePage = () => {
   if (!article) return <div>Article not found</div>;
 
   return (
-    <div>
+    <div style={{
+      maxWidth: '1280px',
+      margin: '2rem auto',
+      padding: '0 1rem',
+      display: 'grid',
+      gridTemplateColumns: '1fr 400px',
+      gap: '2rem'
+    }}>
       <div>
         <ArticleCard article={article} isPreview={false} />
       </div>
-      <div>
-        <h2>Related Books</h2>
+      <aside style={{
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        border: '1px solid #e5e7eb',
+        padding: '1.5rem',
+        height: 'fit-content'
+      }}>
+        <h2 style={{
+          fontSize: '1.25rem',
+          fontWeight: 700,
+          marginBottom: '1rem',
+          fontFamily: 'Merriweather, serif',
+          color: '#111827'
+        }}>Related Books</h2>
         <BookList books={relatedBooks} />
-      </div>
+      </aside>
     </div>
   );
 };

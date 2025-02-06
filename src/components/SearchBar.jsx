@@ -1,4 +1,4 @@
-            fontFamily: 'Merriweather, serif',          fontFamily: 'Merriweather, serif',import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const SearchBar = ({ onSearch, onClear, searchTerm = '' }) => {

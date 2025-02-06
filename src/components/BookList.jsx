@@ -3,7 +3,11 @@ import BookCard from './BookCard';
 
 const BookList = ({ books }) => {
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '1.5rem'
+    }}>
       {books.map(book => (
         <BookCard key={book.id} book={book} />
       ))}

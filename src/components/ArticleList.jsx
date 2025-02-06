@@ -71,6 +71,16 @@ const ArticleList = ({ keyword, topicId, featured, startDate, endDate }) => {
           key={i}
           onClick={() => handlePageClick(i)}
           disabled={isLoading || i === currentPage}
+          style={{
+            padding: '0.5rem 1rem',
+            border: '1px solid #D1D5DB',
+            borderRadius: '6px',
+            backgroundColor: i === currentPage ? '#F3F4F6' : 'white',
+            color: '#374151',
+            cursor: i === currentPage ? 'default' : 'pointer',
+            fontSize: '0.875rem',
+            fontFamily: 'Merriweather, serif'
+          }}
         >
           {i}
         </button>
@@ -80,18 +90,24 @@ const ArticleList = ({ keyword, topicId, featured, startDate, endDate }) => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: '2rem' }}>
       {isLoading && <LoadingSkeleton />}
       {error && <ErrorMessage message={error} onRetry={fetchArticles} />}
       
       {!isLoading && !error && (
         <>
-          <div>
+          <div style={{ marginBottom: '2rem' }}>
             {articles.map(article => (
               <ArticleCard key={article.id} article={article} />
             ))}
           </div>
-          <div>
+          <div style={{
+            display: 'flex',
+            gap: '0.5rem',
+            justifyContent: 'center',
+            marginTop: '2rem',
+            marginBottom: '4rem'
+          }}>
             {renderPageNumbers()}
           </div>
         </>
