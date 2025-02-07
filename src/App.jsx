@@ -1,34 +1,38 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
 import ArticleList from './components/ArticleList';
 import ArticlePage from './pages/ArticlePage';
-import Navigation from './components/Navigation';
 
 function App() {
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (term) => {
-    setSearchKeyword(term);
+    setSearchTerm(term);
   };
 
-  const handleClear = () => {
-    setSearchKeyword('');
+  const handleClearSearch = () => {
+    setSearchTerm('');
   };
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#fafafa]">
         <Navigation 
           onSearch={handleSearch} 
-          onClearSearch={handleClear}
-          searchTerm={searchKeyword}
+          onClearSearch={handleClearSearch}
+          searchTerm={searchTerm}
         />
-        <main className="container mx-auto px-4">
-          <Routes>
-            <Route path="/" element={<ArticleList keyword={searchKeyword} />} />
-            <Route path="/articles/:id" element={<ArticlePage />} />
-          </Routes>
-        </main>
+        <Routes>
+          <Route 
+            path="/" 
+            element={<ArticleList keyword={searchTerm} />} 
+          />
+          <Route 
+            path="/articles/:id" 
+            element={<ArticlePage />} 
+          />
+        </Routes>
       </div>
     </BrowserRouter>
   );

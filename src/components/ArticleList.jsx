@@ -90,7 +90,7 @@ const ArticleList = ({ keyword, topicId, featured, startDate, endDate }) => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="max-w-7xl mx-auto px-4 mt-8">
       {isLoading && <LoadingSkeleton />}
       {error && <ErrorMessage message={error} onRetry={fetchArticles} />}
       

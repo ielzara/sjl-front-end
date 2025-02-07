@@ -21,7 +21,7 @@ const BookCard = ({ book }) => {
         href={book.url} 
         target="_blank" 
         rel="noopener noreferrer"
-        className="inline-block px-4 py-2 bg-gray-100 text-gray-700 no-underline rounded-md text-sm font-medium border border-gray-300 mt-auto hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+        className="inline-block px-4 py-2 bg-[#eeeeee] text-gray-900 no-underline rounded-md text-sm font-medium border border-gray-300 mt-auto hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
       >
         Learn More
       </a>
