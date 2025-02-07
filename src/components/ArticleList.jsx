@@ -71,16 +71,16 @@ const ArticleList = ({ keyword, topicId, featured, startDate, endDate }) => {
           key={i}
           onClick={() => handlePageClick(i)}
           disabled={isLoading || i === currentPage}
-          style={{
-            padding: '0.5rem 1rem',
-            border: '1px solid #D1D5DB',
-            borderRadius: '6px',
-            backgroundColor: i === currentPage ? '#F3F4F6' : 'white',
-            color: '#374151',
-            cursor: i === currentPage ? 'default' : 'pointer',
-            fontSize: '0.875rem',
-            fontFamily: 'Merriweather, serif'
-          }}
+          className={`
+            px-4 py-2
+            border border-gray-300
+            rounded-md
+            text-sm text-gray-700
+            font-merriweather
+            ${i === currentPage 
+              ? 'bg-gray-100 cursor-default' 
+              : 'bg-white cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors'}
+          `}
         >
           {i}
         </button>
@@ -90,24 +90,18 @@ const ArticleList = ({ keyword, topicId, featured, startDate, endDate }) => {
   };
 
   return (
-    <div style={{ marginTop: '2rem' }}>
+    <div className="mt-8">
       {isLoading && <LoadingSkeleton />}
       {error && <ErrorMessage message={error} onRetry={fetchArticles} />}
       
       {!isLoading && !error && (
         <>
-          <div style={{ marginBottom: '2rem' }}>
+          <div className="mb-8">
             {articles.map(article => (
               <ArticleCard key={article.id} article={article} />
             ))}
           </div>
-          <div style={{
-            display: 'flex',
-            gap: '0.5rem',
-            justifyContent: 'center',
-            marginTop: '2rem',
-            marginBottom: '4rem'
-          }}>
+          <div className="flex justify-center gap-2 mt-8 mb-16">
             {renderPageNumbers()}
           </div>
         </>
