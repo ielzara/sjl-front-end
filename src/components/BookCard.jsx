@@ -2,76 +2,26 @@ import PropTypes from "prop-types";
 
 const BookCard = ({ book }) => {
   return (
-    <div style={{
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      border: '1px solid #e5e7eb',
-      padding: '1.5rem',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '1rem',
-      margin: '0.75rem 0'
-    }}>
+    <div className="bg-white rounded-lg border border-gray-200 p-6 flex flex-col items-center gap-4 my-3">
       {book.cover_url && (
-        <div style={{
-          width: '150px',
-          height: '225px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: '0.5rem'
-        }}>
+        <div className="w-[150px] h-[225px] flex justify-center items-center mb-2">
           <img 
             src={book.cover_url} 
             alt={`${book.title} cover`}
-            style={{
-              maxWidth: '100%',
-              maxHeight: '100%',
-              objectFit: 'contain',
-              borderRadius: '4px',
-              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)'
-            }}
+            className="max-w-full max-h-full object-contain rounded shadow-sm"
           />
         </div>
       )}
-      <h3 style={{
-        fontSize: '1.125rem',
-        fontWeight: '700',
-        color: '#111827',
-        fontFamily: 'Merriweather, serif',
-        marginBottom: '0.5rem'
-      }}>{book.title}</h3>
-      <p style={{
-        fontSize: '0.875rem',
-        color: '#4B5563',
-        marginBottom: '1rem'
-      }}>{book.author}</p>
+      <h3 className="text-lg font-bold text-gray-900 font-merriweather mb-2 text-center">{book.title}</h3>
+      <p className="text-sm text-gray-600 mb-4">{book.author}</p>
       {book.relevance_explanation && (
-        <p style={{
-          fontSize: '0.875rem',
-          color: '#6B7280',
-          lineHeight: '1.5',
-          marginBottom: '1rem',
-          textAlign: 'left'
-        }}>{book.relevance_explanation}</p>
+        <p className="text-sm text-gray-600 leading-normal mb-4 text-left">{book.relevance_explanation}</p>
       )}
       <a 
         href={book.url} 
         target="_blank" 
         rel="noopener noreferrer"
-        style={{
-          display: 'inline-block',
-          padding: '0.5rem 1rem',
-          backgroundColor: '#F3F4F6',
-          color: '#374151',
-          textDecoration: 'none',
-          borderRadius: '6px',
-          fontSize: '0.875rem',
-          fontWeight: '500',
-          border: '1px solid #D1D5DB',
-          marginTop: 'auto'
-        }}
+        className="inline-block px-4 py-2 bg-gray-100 text-gray-700 no-underline rounded-md text-sm font-medium border border-gray-300 mt-auto hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
       >
         Learn More
       </a>

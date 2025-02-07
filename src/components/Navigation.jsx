@@ -13,7 +13,7 @@ const Navigation = ({ onSearch, onClearSearch, searchTerm }) => {
             alt="Social Justice Library Logo" 
             className="h-32 w-auto" 
           />
-          <span className="text-xl font-bold ml-4 text-gray-800 font-merriweather">Social Justice Library</span>
+          <span className="text-3xl font-bold ml-4 text-gray-800 font-merriweather">Social Justice Library</span>
         </Link>
         
         <div className="w-[400px]">

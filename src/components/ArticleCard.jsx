@@ -37,13 +37,13 @@ const ArticleCard = ({ article, isPreview = true }) => {
         flex-col
         ${isPreview ? 'justify-center' : 'justify-start'}
       `}>
-        <h2 className={`
-          ${isPreview ? 'text-2xl' : 'text-4xl'}
+        <h1 className={`
+          ${isPreview ? 'text-2xl' : 'text-3xl'}
           font-bold
           mb-3
           font-serif
           text-gray-900
-        `}>{article.title}</h2>
+        `}>{article.title}</h1>
 
         <div className="flex items-center gap-4 mb-4 text-gray-500 text-sm">
           <TimeStamp time={article.date} />
@@ -89,7 +89,7 @@ const ArticleCard = ({ article, isPreview = true }) => {
             className="article-content max-w-full overflow-hidden"
             dangerouslySetInnerHTML={{ 
               __html: isPreview 
-                ? article.content.substring(0, 500) + '...'
+                ? article.content.substring(0, 700) + '...'
                 : article.content
             }} 
           />
@@ -99,7 +99,7 @@ const ArticleCard = ({ article, isPreview = true }) => {
         <div className="flex justify-start">
         <Link 
         to={`/articles/${article.id}`}
-        className="inline-block px-4 py-2 bg-gray-100 text-gray-700 no-underline rounded-md text-sm font-medium border border-gray-300"
+        className="inline-block px-4 py-2 bg-gray-100 text-gray-700 no-underline rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
         >
         Read More
         </Link>
