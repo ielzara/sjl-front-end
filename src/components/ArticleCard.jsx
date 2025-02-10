@@ -64,7 +64,7 @@ const ArticleCard = ({ article, isPreview = true }) => {
       {/* Article content */}
       <div className="p-4 flex-1 flex flex-col">
         <h1 className={`
-          ${isPreview ? 'text-sm' : 'text-lg md:text-3xl text-left'}
+          ${isPreview ? 'text-[1rem]' : 'text-lg md:text-3xl text-left'}
           font-bold
           mb-2
           font-serif
