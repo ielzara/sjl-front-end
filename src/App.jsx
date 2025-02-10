@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import ArticleList from './components/ArticleList';
 import ArticlePage from './pages/ArticlePage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="min-h-screen bg-[#fafafa]">
         <Navigation 
           onSearch={handleSearch} 

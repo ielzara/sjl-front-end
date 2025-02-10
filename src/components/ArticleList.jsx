@@ -90,13 +90,13 @@ const ArticleList = ({ keyword, topicId, featured, startDate, endDate }) => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 mt-8">
+    <div className="max-w-[90%] mx-auto px-4 mt-8">
       {isLoading && <LoadingSkeleton />}
       {error && <ErrorMessage message={error} onRetry={fetchArticles} />}
       
       {!isLoading && !error && (
         <>
-          <div className="mb-8">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-8">
             {articles.map(article => (
               <ArticleCard key={article.id} article={article} />
             ))}

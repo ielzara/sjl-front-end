@@ -4,6 +4,40 @@ import { Link } from 'react-router-dom';
 import './ArticleContent.css';
 
 const ArticleCard = ({ article, isPreview = true }) => {
+  const truncateText = (html, length) => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const textContent = tempDiv.textContent || tempDiv.innerText;
+    
+    if (textContent.length <= length) return html;
+    
+    let textLength = 0;
+    let htmlLength = 0;
+    const chars = html.split('');
+    const tempDiv2 = document.createElement('div');
+    
+    for (let i = 0; i < chars.length; i++) {
+      tempDiv2.innerHTML = html.substring(0, i + 1);
+      const currentTextLength = (tempDiv2.textContent || tempDiv2.innerText).length;
+      
+      if (currentTextLength > length) {
+        htmlLength = i;
+        break;
+      }
+      // textLength = currentTextLength;
+    }
+    
+    const truncatedHtml = html.substring(0, htmlLength);
+    const lastOpenTag = truncatedHtml.lastIndexOf('<');
+    const lastCloseTag = truncatedHtml.lastIndexOf('>');
+    
+    let finalHtml = lastOpenTag > lastCloseTag 
+      ? truncatedHtml.substring(0, lastOpenTag)
+      : truncatedHtml;
+      
+    return finalHtml + '...';
+  };
+
   return (
     <article className={`
       bg-white
@@ -11,41 +45,33 @@ const ArticleCard = ({ article, isPreview = true }) => {
       border
       border-gray-200
       overflow-hidden
-      mb-8
+      ${isPreview ? 'h-full' : 'mb-6 md:mb-8'}
       shadow-sm
       flex
-      ${isPreview ? 'flex-col md:flex-row p-4 md:p-6' : 'flex-col p-0'}
+      ${isPreview ? 'flex-col md:flex-row' : 'flex-col'}
     `}>
       {/* Article image for preview mode */}
       {isPreview && article.thumbnail_url && (
-        <div className="w-full md:w-[300px] h-auto md:flex-shrink-0 md:mr-6 flex items-center mb-4 md:mb-0">
-          <div className="w-full h-[200px] rounded overflow-hidden">
-            <img 
-              src={article.thumbnail_url}
-              alt={article.main_image_alt || article.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
+        <div className="w-full md:w-[280px] bg-gray-100 flex-shrink-0 flex items-center">
+          <img 
+            src={article.thumbnail_url}
+            alt={article.main_image_alt || article.title}
+            className="w-full h-auto object-contain"
+          />
         </div>
       )}
 
       {/* Article content */}
-      <div className={`
-        p-4 md:p-6
-        flex-1
-        flex
-        flex-col
-        ${isPreview ? 'justify-start md:justify-center' : 'justify-start'}
-      `}>
+      <div className="p-4 flex-1 flex flex-col">
         <h1 className={`
-          ${isPreview ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'}
+          ${isPreview ? 'text-lg' : 'text-lg md:text-3xl text-left'}
           font-bold
-          mb-3
+          mb-2
           font-serif
           text-gray-900
         `}>{article.title}</h1>
 
-        <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-4 text-gray-500 text-sm">
+        <div className="flex flex-wrap items-center gap-1.5 mb-2 text-gray-500 text-xs">
           <TimeStamp time={article.date} />
           <span>|</span>
           <span>
@@ -59,21 +85,21 @@ const ArticleCard = ({ article, isPreview = true }) => {
             </a>
           </span>
           {article.featured && (
-            <span className="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-xs font-medium">
+            <span className="bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded-full text-xs font-medium">
               Featured
             </span>
           )}
         </div>
 
         {!isPreview && article.main_image_url && (
-          <div className="w-full md:w-[70%] mx-auto my-6 md:my-8 rounded-lg overflow-hidden">
+          <div className="w-full md:w-[70%] mx-auto my-4 md:my-8 rounded-lg overflow-hidden">
             <img
               src={article.main_image_url}
               alt={article.main_image_alt || article.title}
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-contain"
             />
             {(article.main_image_caption || article.main_image_credit) && (
-              <div className="text-sm text-gray-500 mt-2 px-4 md:px-6">
+              <div className="text-xs md:text-sm text-gray-500 mt-1 md:mt-2 px-2 md:px-4">
                 {article.main_image_caption}
                 {article.main_image_caption && article.main_image_credit && ' | '}
                 {article.main_image_credit && (
@@ -84,22 +110,22 @@ const ArticleCard = ({ article, isPreview = true }) => {
           </div>
         )}
 
-        <div className="text-gray-600 text-base leading-normal mb-6">
+        <div className="text-gray-600 text-[lg leading-relaxed mb-4">
           <div 
             className="article-content max-w-full overflow-hidden"
             dangerouslySetInnerHTML={{ 
               __html: isPreview 
-                ? article.content.substring(0, 700) + '...'
+                ? truncateText(article.content, 250)
                 : article.content
             }} 
           />
         </div>
 
         {isPreview && (
-        <div className="flex justify-start">
+        <div className="flex justify-start mt-auto">
           <Link 
             to={`/articles/${article.id}`}
-            className="inline-block px-4 py-2 bg-[#eeeeee] text-gray-900 no-underline rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+            className="inline-block px-3 py-1.5 bg-[#eeeeee] text-gray-900 no-underline rounded text-sm font-medium border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
           >
             Read More
           </Link>
