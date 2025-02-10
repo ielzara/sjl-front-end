@@ -64,7 +64,7 @@ const ArticleCard = ({ article, isPreview = true }) => {
       {/* Article content */}
       <div className="p-4 flex-1 flex flex-col">
         <h1 className={`
-          ${isPreview ? 'text-lg' : 'text-lg md:text-3xl text-left'}
+          ${isPreview ? 'text-sm' : 'text-lg md:text-3xl text-left'}
           font-bold
           mb-2
           font-serif
@@ -110,7 +110,7 @@ const ArticleCard = ({ article, isPreview = true }) => {
           </div>
         )}
 
-        <div className="text-gray-600 text-[lg leading-relaxed mb-4">
+        <div className="text-gray-600 text-sm leading-relaxed mb-4">
           <div 
             className="article-content max-w-full overflow-hidden"
             dangerouslySetInnerHTML={{ 

@@ -13,7 +13,7 @@ const BookCard = ({ book }) => {
         </div>
       )}
       <h3 className="text-sm font-bold text-gray-900 font-merriweather text-center">{book.title}</h3>
-      <p className="text-sm text-gray-600">{book.author}</p>
+      <p className="text-center text-sm text-gray-600">{book.author}</p>
       {book.relevance_explanation && (
         <p className="text-[0.80rem] text-gray-600 leading-snug text-left">{book.relevance_explanation}</p>
       )}
