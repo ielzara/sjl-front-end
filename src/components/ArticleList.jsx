@@ -96,9 +96,11 @@ const ArticleList = ({ keyword, topicId, featured, startDate, endDate }) => {
       
       {!isLoading && !error && (
         <>
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-8">
+          <div className="xl:columns-2 gap-4 space-y-4 mb-8">
             {articles.map(article => (
-              <ArticleCard key={article.id} article={article} />
+              <div key={article.id} className="break-inside-avoid">
+                <ArticleCard article={article} />
+              </div>
             ))}
           </div>
           <div className="flex justify-center gap-2 mt-8 mb-16">

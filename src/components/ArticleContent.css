@@ -35,3 +35,18 @@
 .article-content h3 {
   font-size: 1.25rem;
 }
+
+/* Styling for YouTube videos */
+.article-content .element-atom,
+.article-content figure.element {
+  margin: 1.5rem 0 !important;
+}
+
+.article-content .element-atom iframe,
+.article-content figure.element iframe {
+  width: 100% !important;
+  height: 315px !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
