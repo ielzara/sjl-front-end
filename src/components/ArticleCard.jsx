@@ -39,61 +39,73 @@ const ArticleCard = ({ article, isPreview = true }) => {
   };
 
   return (
-    <article className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm p-4 min-h-[380px] mb-4">
+    <article className={`
+      bg-white
+      rounded-lg
+      border
+      border-gray-200
+      overflow-hidden
+      shadow-sm
+      h-full
+      p-4
+      relative
+    `}>
       {isPreview ? (
-        <div className="relative h-full">
-          {article.thumbnail_url && (
-            <div className="float-left w-[280px] bg-gray-100 mr-4 mb-3">
-              <img 
-                src={article.thumbnail_url}
-                alt={article.main_image_alt || article.title}
-                className="w-full h-auto object-contain"
-              />
-            </div>
-          )}
+        <>
+          <div className="flow-root h-full pb-12">
+            {article.thumbnail_url && (
+              <div className="float-left w-[280px] bg-gray-100 mr-4 mb-3">
+                <img 
+                  src={article.thumbnail_url}
+                  alt={article.main_image_alt || article.title}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            )}
           
-          <div>
-            <h1 className="text-lg font-bold mb-2 font-serif text-gray-900">{article.title}</h1>
+            <div>
+              <h1 className="text-lg font-bold mb-2 font-serif text-gray-900">{article.title}</h1>
 
-            <div className="flex flex-wrap items-center gap-1.5 mb-2 text-gray-500 text-xs">
-              <TimeStamp time={article.date} />
-              <span>|</span>
-              <span>
-                <a 
-                  href={article.url} 
-                  className="text-gray-500 no-underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {article.source}
-                </a>
-              </span>
-              {article.featured && (
-                <span className="bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded-full text-xs font-medium">
-                  Featured
+              <div className="flex flex-wrap items-center gap-1.5 mb-2 text-gray-500 text-xs">
+                <TimeStamp time={article.date} />
+                <span>|</span>
+                <span>
+                  <a 
+                    href={article.url} 
+                    className="text-gray-500 no-underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {article.source}
+                  </a>
                 </span>
-              )}
-            </div>
+                {article.featured && (
+                  <span className="bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded-full text-xs font-medium">
+                    Featured
+                  </span>
+                )}
+              </div>
 
-            <div className="text-gray-600 text-sm leading-relaxed">
-              <div 
-                className="article-content"
-                dangerouslySetInnerHTML={{ 
-                  __html: truncateText(article.content, 250)
-                }} 
-              />
-            </div>
-
-            <div className="mt-4">
-              <Link 
-                to={`/articles/${article.id}`}
-                className="inline-block px-3 py-1.5 bg-[#eeeeee] text-gray-900 no-underline rounded text-sm font-medium border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
-              >
-                Read More
-              </Link>
+              <div className="text-gray-600 text-sm leading-relaxed">
+                <div 
+                  className="article-content"
+                  dangerouslySetInnerHTML={{ 
+                    __html: truncateText(article.content, 250)
+                  }} 
+                />
+              </div>
             </div>
           </div>
-        </div>
+
+          <div className="absolute bottom-4 left-4">
+            <Link 
+              to={`/articles/${article.id}`}
+              className="inline-block px-3 py-1.5 bg-[#eeeeee] text-gray-900 no-underline rounded text-sm font-medium border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 transition-colors"
+            >
+              Read More
+            </Link>
+          </div>
+        </>
       ) : (
         // Full article view
         <div>
