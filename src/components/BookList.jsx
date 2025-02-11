@@ -3,7 +3,7 @@ import BookCard from './BookCard';
 
 const BookList = ({ books }) => {
   return (
-    <div className="grid grid-cols-1 2xl:grid-cols-2 gap-3 text-center">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 text-center">
       {books.map(book => (
         <BookCard key={book.id} book={book} />
       ))}
