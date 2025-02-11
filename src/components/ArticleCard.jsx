@@ -79,7 +79,7 @@ const ArticleCard = ({ article, isPreview = true }) => {
               <div 
                 className="article-content"
                 dangerouslySetInnerHTML={{ 
-                  __html: truncateText(article.content, 250)
+                  __html: truncateText(article.content, 300)
                 }} 
               />
             </div>
